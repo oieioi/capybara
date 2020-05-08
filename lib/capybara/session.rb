@@ -748,9 +748,9 @@ module Capybara
     NODE_METHODS.each do |method|
       if RUBY_VERSION >= '2.7'
         class_eval <<~METHOD, __FILE__, __LINE__ + 1
-          def #{method}(...)
+          def #{method}(*args, **options, &block)
             @touched = true
-            current_scope.#{method}(...)
+            current_scope.#{method}(*args, **options, &block)
           end
         METHOD
       else
